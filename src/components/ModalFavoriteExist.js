@@ -1,4 +1,5 @@
 import { Modal } from 'antd'
+import { localizedString } from '../config/init/internalization'
 
 const ModalFavoriteExist = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -15,7 +16,7 @@ const ModalFavoriteExist = (props) => {
       onCancel={handleCancel}
       onOk={handleCancel}
     >
-      El producto ya se encuentra seleccionado
+      {localizedString.thisProductIsAlreadySelected}
     </Modal>
   </div>
   )
