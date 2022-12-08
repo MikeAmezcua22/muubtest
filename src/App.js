@@ -1,11 +1,11 @@
-import PrimerArchivo from './components/PrimerArchivo';
+import Main from './components/Main'
 
-function App() {
+function App () {
   return (
     <div>
-      <PrimerArchivo />
+      <Main />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

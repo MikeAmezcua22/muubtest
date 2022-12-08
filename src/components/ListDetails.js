@@ -1,31 +1,24 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
 import { Drawer, Image, Divider } from 'antd'
 
 const styles = {
-  detailsPrice : {
-    fontSize : '30px'
+  detailsPrice: {
+    fontSize: '30px'
   },
-  detailsTitle : {
+  detailsTitle: {
     fontWeight: 'bold'
   },
   detailsDescription: {
-    color :'#808080'
+    color: '#808080'
   }
 }
 
 const ListDetails = (props) => {
-
-  const {
-    setOpenDetails,
-    openDetails,
-    detailInfoProduct
-  } = props
-
-  console.log(detailInfoProduct)
+  const { setOpenDetails, openDetails, detailInfoProduct } = props
 
   const onClose = () => {
-    setOpenDetails(false);
-  };
+    setOpenDetails(false)
+  }
 
   return (
     <div>
@@ -36,7 +29,7 @@ const ListDetails = (props) => {
         <Image
           width={200}
           src={detailInfoProduct.image}
-        
+
         />
         <Divider />
           <p style={styles.detailsPrice}>$ {detailInfoProduct.price}</p>

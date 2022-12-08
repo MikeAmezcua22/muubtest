@@ -1,17 +1,16 @@
-import {React} from 'react'
-import {Modal} from 'antd'
+import { Modal } from 'antd'
 
 const ModalFavoriteExist = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const { showModal, setShowModal } = props
 
-const  { showModal, setShowModal } = props
+  const handleCancel = () => {
+    setShowModal(false)
+  }
 
-const handleCancel = () => {
-  setShowModal(false);
-}
-
-return (
+  return (
   <div>
-    <Modal 
+    <Modal
       open={showModal}
       onCancel={handleCancel}
       onOk={handleCancel}

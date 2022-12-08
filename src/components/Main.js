@@ -1,40 +1,35 @@
-import {
-  Layout
-} from 'antd'
-
-import {React, useEffect, useState} from 'react'
+import { Layout } from 'antd'
+import { useEffect, useState } from 'react'
 import API from '../controllers/ApiServices'
-import MenuFavoritos from './MenuFavoritos';
-import ListProducts from './ListProducts';
+import MenuFavorites from './MenuFavorites'
+import ListProducts from './ListProducts'
 
-const { Header, Footer, Content } = Layout;
+const { Header, Footer, Content } = Layout
 
-const PrimerArchivo = () => {
-
+const Main = () => {
   const [lisProducts, setListProducs] = useState([])
-  
-  const products = async() => {
-    try{
+
+  const products = async () => {
+    try {
       const result = await API.getAllProducts()
       setListProducs(result.data)
-    }catch(error){
+    } catch (error) {
       console.log(error)
     }
   }
-  
+
   useEffect(() => {
     products()
   }, [])
 
-
-return (
+  return (
   <div>
       <Layout className='Layout'>
         <Header>
-          <MenuFavoritos />
+          <MenuFavorites />
         </Header>
         <Content style={{ padding: '60px 0 50px 50px' }}>
-          <ListProducts 
+          <ListProducts
             lisProducts={lisProducts}
           />
 
@@ -42,7 +37,7 @@ return (
         <Footer></Footer>
       </Layout>
   </div>
-)
+  )
 }
 
-export default PrimerArchivo
+export default Main
