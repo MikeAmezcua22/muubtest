@@ -19,21 +19,18 @@ const styles = {
   }
 }
 
-const ListFavorites = ({ showDrawerProduct, setShowDrawerProduct, listFavoriteData }) => {
-  const [localStFavorites, setLocalStFavorites] = useState([])
+const ListFavorites = ({ showDrawerProduct, setShowDrawerProduct }) => {
   const [itemFavorites, setItemFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
-  // const [newListFavorites, setNewListFavorites] = useState([])
 
   const onClose = () => {
     setShowDrawerProduct(false)
+    window.location.reload(false)
   }
 
   const onClickUpdate = (item) => {
     const filterItem = itemFavorites.filter(fav => fav.id !== item.id)
     setItemFavorites(filterItem)
   }
-
-  // console.log(localStFavorites)
 
   useEffect(() => {
     setItemFavorites(JSON.parse(localStorage.getItem('favorites')) || [])
@@ -59,7 +56,6 @@ const ListFavorites = ({ showDrawerProduct, setShowDrawerProduct, listFavoriteDa
           lg: 4
         }}
 
-        // dataSource={localStFavorites}
         dataSource={itemFavorites}
 
         pagination={{

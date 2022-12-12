@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { HeartTwoTone, SmallDashOutlined } from '@ant-design/icons'
 import {
   Card, Col, Row,
-  Button, List, Alert
+  Button, List
 } from 'antd'
 import ModalFavoriteExist from './ModalFavoriteExist'
 import ListDetails from './ListDetails'

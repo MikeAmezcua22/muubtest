@@ -6,7 +6,6 @@ import ListFavoritos from './ListFavorites'
 const MenuFavorites = () => {
   const [current, setCurrent] = useState('')
   const [showDrawerProduct, setShowDrawerProduct] = useState(false)
-  const [listFavoriteData, setListFavoriteData] = useState([])
 
   const items = [
     {
@@ -18,14 +17,6 @@ const MenuFavorites = () => {
 
   const onClick = (e) => {
     setShowDrawerProduct(true)
-
-    const reviewLocalStorage = localStorage.getItem('favorites')
-    console.log(reviewLocalStorage)
-    // setListFavoriteData(reviewLocalStorage)
-    // console.log(!reviewLocalStorage)
-    // if (!reviewLocalStorage) {
-    //   localStorage.setItem('favorites', [])
-    // }
   }
 
   return (

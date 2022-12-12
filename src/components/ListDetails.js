@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Drawer, Image, Divider } from 'antd'
 
 const styles = {
