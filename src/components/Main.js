@@ -20,6 +20,7 @@ const Main = () => {
 
   useEffect(() => {
     products()
+    // localStorage.setItem('favorites', ['hola'])
   }, [])
 
   return (

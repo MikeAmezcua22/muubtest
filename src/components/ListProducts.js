@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { HeartTwoTone, SmallDashOutlined } from '@ant-design/icons'
 import {
   Card, Col, Row,
-  Button, List
+  Button, List, Alert
 } from 'antd'
 import ModalFavoriteExist from './ModalFavoriteExist'
 import ListDetails from './ListDetails'
@@ -27,24 +27,25 @@ const styles = {
 }
 
 const ListProducts = (props) => {
-  const [favorites, setFavorites] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
   const [detailInfoProduct, setDetailInfoProducts] = useState([])
+  const [itemFavorites, setItemFavorites] = useState([])
 
   const {
-    // eslint-disable-next-line react/prop-types
     lisProducts
   } = props
 
   const onClick = (item) => {
-    const filterItems = favorites.filter(i => i.id === item.id)
+    setItemFavorites(JSON.parse(localStorage.getItem('favorites')))
+    const resultFilterFavorites = itemFavorites.filter(itemFav => itemFav.id === item.id)
 
-    if (filterItems.length === 0) {
-      setFavorites((old) => [...old, item])
+    if (!resultFilterFavorites.length) {
+      const getItemsForLocalStorage = JSON.parse(localStorage.getItem('favorites'))
+      setItemFavorites([...getItemsForLocalStorage, item])
     }
 
-    if (filterItems.length !== 0) {
+    if (resultFilterFavorites.length) {
       setShowModal(true)
     }
   }
@@ -55,8 +56,8 @@ const ListProducts = (props) => {
   }
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites])
+    localStorage.setItem('favorites', JSON.stringify(itemFavorites))
+  }, [itemFavorites])
 
   return (
   <div>
@@ -96,6 +97,7 @@ const ListProducts = (props) => {
               <Col span={12}>
                 <Button
                   onClick={() => onClick(item)}
+                  // onClick={() => setItemFavorites(itemFavorites.filter(itemFav => itemFav.id !== item.id))}
                   icon={<HeartTwoTone twoToneColor="#eb2f96"/>}
                   shape="circle" size='large'
                 />

@@ -5,7 +5,8 @@ import ListFavoritos from './ListFavorites'
 
 const MenuFavorites = () => {
   const [current, setCurrent] = useState('')
-  const [open, setOpen] = useState(false)
+  const [showDrawerProduct, setShowDrawerProduct] = useState(false)
+  const [listFavoriteData, setListFavoriteData] = useState([])
 
   const items = [
     {
@@ -16,9 +17,15 @@ const MenuFavorites = () => {
   ]
 
   const onClick = (e) => {
-    console.log('click ', e)
-    setCurrent(e.key)
-    setOpen(true)
+    setShowDrawerProduct(true)
+
+    const reviewLocalStorage = localStorage.getItem('favorites')
+    console.log(reviewLocalStorage)
+    // setListFavoriteData(reviewLocalStorage)
+    // console.log(!reviewLocalStorage)
+    // if (!reviewLocalStorage) {
+    //   localStorage.setItem('favorites', [])
+    // }
   }
 
   return (
@@ -32,8 +39,8 @@ const MenuFavorites = () => {
       />
 
       <ListFavoritos
-        open={open}
-        setOpen={(open) => setOpen(open)}
+        showDrawerProduct={showDrawerProduct}
+        setShowDrawerProduct={(showDrawerProduct) => setShowDrawerProduct(showDrawerProduct)}
       />
     </div>
   )

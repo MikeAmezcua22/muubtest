@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import {
-  Card, List, Drawer
+  Card, List, Drawer, Row,
+  Col, Button
 } from 'antd'
+
+import { MinusOutlined } from '@ant-design/icons'
 
 const styles = {
   imgs: {
@@ -12,27 +15,38 @@ const styles = {
   },
   cardSize: {
     width: 300,
-    height: 500
+    height: 600
   }
 }
 
-const ListFavorites = ({ open, setOpen }) => {
+const ListFavorites = ({ showDrawerProduct, setShowDrawerProduct, listFavoriteData }) => {
   const [localStFavorites, setLocalStFavorites] = useState([])
+  const [itemFavorites, setItemFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
+  // const [newListFavorites, setNewListFavorites] = useState([])
 
   const onClose = () => {
-    setOpen(false)
+    setShowDrawerProduct(false)
   }
 
+  const onClickUpdate = (item) => {
+    const filterItem = itemFavorites.filter(fav => fav.id !== item.id)
+    setItemFavorites(filterItem)
+  }
+
+  // console.log(localStFavorites)
+
   useEffect(() => {
-    const favorites = localStorage.getItem('favorites')
-    const parseFavorites = JSON.parse(favorites)
-    setLocalStFavorites(parseFavorites)
-  }, [open])
+    setItemFavorites(JSON.parse(localStorage.getItem('favorites')) || [])
+  }, [showDrawerProduct])
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(itemFavorites) || [])
+  }, [itemFavorites])
 
   return (
   <div>
     <Drawer
-      open={open}
+      open={showDrawerProduct}
       onClose={onClose}
     >
       <List
@@ -45,12 +59,10 @@ const ListFavorites = ({ open, setOpen }) => {
           lg: 4
         }}
 
-        dataSource={localStFavorites}
+        // dataSource={localStFavorites}
+        dataSource={itemFavorites}
 
         pagination={{
-          onChange: (page) => {
-            console.log(page)
-          },
           pageSize: 10
         }}
 
@@ -69,6 +81,15 @@ const ListFavorites = ({ open, setOpen }) => {
             >
               <p>Price: {item.price}</p>
               <p>Title: {item.title}</p>
+            <Row>
+              <Col span={12}>
+                <Button
+                  onClick={() => onClickUpdate(item)}
+                  icon={< MinusOutlined twoToneColor="#eb2f96"/>}
+                  shape="circle" size='large'
+                />
+              </Col>
+            </Row>
             </Card>
           </List.Item>
         )}
