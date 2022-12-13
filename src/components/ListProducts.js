@@ -30,7 +30,7 @@ const ListProducts = (props) => {
   const [showModal, setShowModal] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
   const [detailInfoProduct, setDetailInfoProducts] = useState([])
-  const [itemFavorites, setItemFavorites] = useState([])
+  const [itemFavorites, setItemFavorites] = useState(JSON.parse(localStorage.getItem('favorites')))
 
   const {
     lisProducts
